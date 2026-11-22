@@ -30,8 +30,9 @@ yarn-error.*
 .DS_Store
 *.pem
 
-# local env files
-.env*.local
+# Environment variables and secrets
+.env*
+!.env.example
 
 # typescript
 *.tsbuildinfo
@@ -41,3 +42,11 @@ example
 # generated native folders
 /ios
 /android
+
+
+# Claude local settings
+.claude/settings.json
+
+# Environment variables
+.env*
+!.env.example
