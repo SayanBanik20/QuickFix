@@ -59,35 +59,39 @@ export default function HomeScreen() {
           <Text style={styles.offerEmoji}>🏠</Text>
         </View>
         {/* Booking Options */}
-<View style={styles.bookingSection}>
-  <Text style={styles.bookingSectionTitle}>How would you like to book?</Text>
+        <View style={styles.bookingSection}>
+          <Text style={styles.bookingSectionTitle}>
+            How would you like to book?
+          </Text>
 
-  <View style={styles.bookingOptions}>
-    {/* Instant Booking */}
-    <Pressable
-  style={styles.instantCard}
-  onPress={() => router.push("/instant-booking")}
->
-      <Text style={styles.bookingIcon}>⚡</Text>
-      <Text style={styles.instantTitle}>Book in</Text>
-      <Text style={styles.instantTitle}>10 mins</Text>
-      <Text style={styles.instantSubtitle}>Nearest worker assigned</Text>
-      <Text style={styles.bookingArrow}>→</Text>
-    </Pressable>
+          <View style={styles.bookingOptions}>
+            {/* Instant Booking */}
+            <Pressable
+              style={styles.instantCard}
+              onPress={() => router.push("/instant-booking")}
+            >
+              <Text style={styles.bookingIcon}>⚡</Text>
+              <Text style={styles.instantTitle}>Book in</Text>
+              <Text style={styles.instantTitle}>10 mins</Text>
+              <Text style={styles.instantSubtitle}>
+                Nearest worker assigned
+              </Text>
+              <Text style={styles.bookingArrow}>→</Text>
+            </Pressable>
 
-    {/* Scheduled Booking */}
-    <Pressable
-  style={styles.scheduleCard}
-  onPress={() => router.push('/schedule-booking')}
->
-      <Text style={styles.bookingIcon}>📅</Text>
-      <Text style={styles.scheduleTitle}>Schedule</Text>
-      <Text style={styles.scheduleTitle}>for later</Text>
-      <Text style={styles.scheduleSubtitle}>Choose date & time</Text>
-      <Text style={styles.bookingArrowGreen}>→</Text>
-    </Pressable>
-  </View>
-</View>
+            {/* Scheduled Booking */}
+            <Pressable
+              style={styles.scheduleCard}
+              onPress={() => router.push("/schedule-workers")}
+            >
+              <Text style={styles.bookingIcon}>📅</Text>
+              <Text style={styles.scheduleTitle}>Schedule</Text>
+              <Text style={styles.scheduleTitle}>for later</Text>
+              <Text style={styles.scheduleSubtitle}>Choose date & time</Text>
+              <Text style={styles.bookingArrowGreen}>→</Text>
+            </Pressable>
+          </View>
+        </View>
         {/* Services Section */}
         <View style={styles.servicesSection}>
           <View style={styles.sectionHeader}>
@@ -411,7 +415,7 @@ const styles = StyleSheet.create({
     color: "#999999",
     fontWeight: "normal",
   },
-    // Booking options
+  // Booking options
   bookingSection: {
     marginTop: 22,
   },

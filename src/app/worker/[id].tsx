@@ -1,5 +1,4 @@
-
-import { useLocalSearchParams, useRouter } from 'expo-router';
+import { useLocalSearchParams, useRouter } from "expo-router";
 import {
   Image,
   ScrollView,
@@ -7,9 +6,9 @@ import {
   Text,
   View,
   Pressable,
-} from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { workers } from '@/data/workers';
+} from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { workers } from "@/data/workers";
 
 export default function WorkerProfileScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -40,24 +39,17 @@ export default function WorkerProfileScreen() {
         </View>
 
         <View style={styles.profileCard}>
-          <Image
-            source={{ uri: worker.image }}
-            style={styles.profileImage}
-          />
+          <Image source={{ uri: worker.image }} style={styles.profileImage} />
 
           <Text style={styles.workerName}>{worker.name}</Text>
 
           <Text style={styles.service}>{worker.service}</Text>
 
           <View style={styles.verifiedBadge}>
-            <Text style={styles.verifiedText}>
-              ✓ Verified Professional
-            </Text>
+            <Text style={styles.verifiedText}>✓ Verified Professional</Text>
           </View>
 
-          <Text style={styles.rating}>
-            ⭐ {worker.rating} Rating
-          </Text>
+          <Text style={styles.rating}>⭐ {worker.rating} Rating</Text>
         </View>
 
         <View style={styles.statsCard}>
@@ -69,9 +61,7 @@ export default function WorkerProfileScreen() {
           <View style={styles.separator} />
 
           <View style={styles.stat}>
-            <Text style={styles.statValue}>
-              {worker.experience}
-            </Text>
+            <Text style={styles.statValue}>{worker.experience}</Text>
             <Text style={styles.statLabel}>Years Experience</Text>
           </View>
         </View>
@@ -82,15 +72,47 @@ export default function WorkerProfileScreen() {
         </View>
 
         <Pressable
-          style={styles.bookButton}
+          style={{
+            backgroundColor: "#245C42",
+            paddingVertical: 14,
+            paddingHorizontal: 20,
+            borderRadius: 14,
+            alignItems: "center",
+            justifyContent: "center",
+            alignSelf: "center",
+            width: "90%",
+            marginTop: 16,
+            marginBottom: 25,
+          }}
           onPress={() =>
-  router.push({
-    pathname: '/booking/[id]',
-    params: { id: worker.id },
-  })
-}
+            router.push({
+              pathname: "/schedule-booking",
+              params: { workerId: worker.id },
+            })
+          }
         >
-          <Text style={styles.bookButtonText}>Book Now</Text>
+          <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
+            <Text style={{ fontSize: 18 }}>📅</Text>
+            <Text
+              style={{
+                color: "#FFFFFF",
+                fontWeight: "700",
+                fontSize: 16,
+              }}
+            >
+              Schedule with this worker
+            </Text>
+          </View>
+
+          <Text
+            style={{
+              color: "#DCEBE2",
+              fontSize: 12,
+              marginTop: 5,
+            }}
+          >
+            Choose your preferred date & time
+          </Text>
         </Pressable>
       </ScrollView>
     </SafeAreaView>
@@ -100,123 +122,123 @@ export default function WorkerProfileScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F8F8F5',
+    backgroundColor: "#F8F8F5",
   },
   header: {
     padding: 20,
   },
   backButton: {
     fontSize: 16,
-    color: '#245C42',
-    fontWeight: '600',
+    color: "#245C42",
+    fontWeight: "600",
   },
   headerTitle: {
     fontSize: 24,
-    fontWeight: 'bold',
-    color: '#245C42',
+    fontWeight: "bold",
+    color: "#245C42",
     marginTop: 18,
   },
   profileCard: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: "#FFFFFF",
     marginHorizontal: 20,
     padding: 24,
     borderRadius: 20,
-    alignItems: 'center',
+    alignItems: "center",
     elevation: 2,
   },
   profileImage: {
     width: 110,
     height: 110,
     borderRadius: 60,
-    backgroundColor: '#EAEAEA',
+    backgroundColor: "#EAEAEA",
   },
   workerName: {
     fontSize: 23,
-    fontWeight: 'bold',
-    color: '#222',
+    fontWeight: "bold",
+    color: "#222",
     marginTop: 15,
   },
   service: {
     fontSize: 15,
-    color: '#777',
+    color: "#777",
     marginTop: 5,
   },
   verifiedBadge: {
-    backgroundColor: '#E4F3E8',
+    backgroundColor: "#E4F3E8",
     paddingHorizontal: 12,
     paddingVertical: 7,
     borderRadius: 20,
     marginTop: 12,
   },
   verifiedText: {
-    color: '#245C42',
-    fontWeight: '600',
+    color: "#245C42",
+    fontWeight: "600",
     fontSize: 13,
   },
   rating: {
     fontSize: 16,
     marginTop: 14,
-    color: '#444',
+    color: "#444",
   },
   statsCard: {
-    flexDirection: 'row',
-    backgroundColor: '#FFFFFF',
+    flexDirection: "row",
+    backgroundColor: "#FFFFFF",
     margin: 20,
     padding: 22,
     borderRadius: 16,
-    justifyContent: 'space-around',
-    alignItems: 'center',
+    justifyContent: "space-around",
+    alignItems: "center",
   },
   stat: {
-    alignItems: 'center',
+    alignItems: "center",
     flex: 1,
   },
   statValue: {
     fontSize: 24,
-    fontWeight: 'bold',
-    color: '#245C42',
+    fontWeight: "bold",
+    color: "#245C42",
   },
   statLabel: {
-    color: '#777',
+    color: "#777",
     fontSize: 12,
     marginTop: 5,
   },
   separator: {
     width: 1,
     height: 40,
-    backgroundColor: '#DDD',
+    backgroundColor: "#DDD",
   },
   priceCard: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: "#FFFFFF",
     marginHorizontal: 20,
     padding: 20,
     borderRadius: 16,
   },
   priceLabel: {
-    color: '#777',
+    color: "#777",
     fontSize: 14,
   },
   price: {
     fontSize: 28,
-    fontWeight: 'bold',
-    color: '#245C42',
+    fontWeight: "bold",
+    color: "#245C42",
     marginTop: 5,
   },
   bookButton: {
-    backgroundColor: '#245C42',
+    backgroundColor: "#245C42",
     margin: 20,
     padding: 17,
     borderRadius: 14,
-    alignItems: 'center',
+    alignItems: "center",
   },
   bookButtonText: {
-    color: '#FFFFFF',
+    color: "#FFFFFF",
     fontSize: 17,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   notFound: {
     fontSize: 18,
-    textAlign: 'center',
+    textAlign: "center",
     marginTop: 50,
   },
 });
