@@ -19,7 +19,9 @@ import {
 export default function BookingsScreen() {
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [loading, setLoading] = useState(true);
-
+const [activeFilter, setActiveFilter] = useState<
+  'Upcoming' | 'Completed' | 'Cancelled'
+>('Upcoming');
   const loadBookings = async () => {
     try {
       const data = await getBookings();
@@ -53,7 +55,21 @@ export default function BookingsScreen() {
       };
     }, [])
   );
+const filteredBookings = bookings.filter((booking) => {
+  if (activeFilter === 'Upcoming') {
+    return booking.status === 'Pending' || booking.status === 'Confirmed';
+  }
 
+  if (activeFilter === 'Completed') {
+    return booking.status === 'Completed';
+  }
+
+  if (activeFilter === 'Cancelled') {
+    return booking.status === 'Cancelled';
+  }
+
+  return true;
+});
   const handleCancelBooking = (booking: Booking) => {
     Alert.alert(
       'Cancel Booking',
@@ -87,10 +103,30 @@ export default function BookingsScreen() {
         <Text style={styles.subtitle}>
           Track your service requests and bookings here.
         </Text>
-
+      <View style={styles.filterContainer}>
+  {(['Upcoming', 'Completed', 'Cancelled'] as const).map((filter) => (
+    <Pressable
+      key={filter}
+      style={[
+        styles.filterButton,
+        activeFilter === filter && styles.activeFilterButton,
+      ]}
+      onPress={() => setActiveFilter(filter)}
+    >
+      <Text
+        style={[
+          styles.filterButtonText,
+          activeFilter === filter && styles.activeFilterButtonText,
+        ]}
+      >
+        {filter}
+      </Text>
+    </Pressable>
+  ))}
+</View>
         {loading ? (
           <Text style={styles.message}>Loading bookings...</Text>
-        ) : bookings.length === 0 ? (
+        ) : filteredBookings.length === 0 ? (
           <View style={styles.emptyCard}>
             <Text style={styles.emptyEmoji}>📅</Text>
             <Text style={styles.emptyTitle}>No bookings yet</Text>
@@ -99,7 +135,7 @@ export default function BookingsScreen() {
             </Text>
           </View>
         ) : (
-          bookings.map((booking) => (
+          filteredBookings.map((booking) => (
             <View key={booking.id} style={styles.bookingCard}>
               <View style={styles.cardHeader}>
                 <View style={styles.headerInfo}>
@@ -308,5 +344,35 @@ const styles = StyleSheet.create({
     color: '#D9534F',
     fontSize: 14,
     fontWeight: '600',
+  },
+    filterContainer: {
+    flexDirection: 'row',
+    gap: 8,
+    marginBottom: 20,
+  },
+
+  filterButton: {
+    flex: 1,
+    paddingVertical: 12,
+    borderRadius: 12,
+    backgroundColor: '#FFFFFF',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#E3E9E1',
+  },
+
+  activeFilterButton: {
+    backgroundColor: '#245C42',
+    borderColor: '#245C42',
+  },
+
+  filterButtonText: {
+    fontSize: 12,
+    fontWeight: '600',
+    color: '#68766C',
+  },
+
+  activeFilterButtonText: {
+    color: '#FFFFFF',
   },
 });
